@@ -1,4 +1,6 @@
-# References
+# Swedish data references
+
+## Area codes
 
 ```py
 from BeautifulSoup import BeautifulSoup
@@ -14,13 +16,13 @@ for table in soup.findAll('table', {'class':'wikitable sortable'}):
         td = tr.findAll('td')
         if len(td) > 1:
             towns = '", "'.join(td[1].text.split('-'))
-            area_codes += '"%s": {towns: ["%s"], county: "%s"},\n' % (td[0].text, towns, td[2].text)
+            area_codes += '"%s": {"towns": ["%s"], "county": "%s"},\n' % (td[0].text, towns, td[2].text)
 
 # mobile network
 jsn = requests.get('http://directory.didww.com/area-prefixes/206.json').content
 for row in json.loads(jsn):
     if row['area']['code']:
-        area_codes += '"0%s": {operator: "%s"},\n' % (row['area']['code'], row['area']['name'][7:-7])
+        area_codes += '"0%s": {"operator": "%s"},\n' % (row['area']['code'], row['area']['name'][7:-7])
 
 with open('area_codes.json','w') as f:
     f.write((area_codes[:-2] + '\n}\n').encode('utf-8'))
