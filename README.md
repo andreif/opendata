@@ -1,4 +1,8 @@
-# Collection of open data
+# A collection of open data
+
+```
+pip install git+git://github.com/andreif/opendata.git
+```
 
 ```py
 >>> import opendata
