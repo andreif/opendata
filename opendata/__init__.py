@@ -13,7 +13,7 @@ class NotFound(Exception): pass
 
 def load(path):
     if CACHED_DATA.has_key(path): return CACHED_DATA[path]
-    full_path = join(dirname(dirname(__file__)), 'data', path if path.endswith('.json') else path + '.json')
+    full_path = join(dirname(__file__), 'data', path if path.endswith('.json') else path + '.json')
     data = CACHED_DATA[path] = json.loads(open(full_path).read())
     return data
 
